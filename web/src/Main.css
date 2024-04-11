@@ -1,0 +1,16 @@
+main{
+    flex: 1; /**Faz o main usar todo o espaço **/ 
+}
+
+main ul{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /**Duas colunas ocupando 50 a 50 % pra 2 elementos **/ 
+    gap:20px;
+    list-style: none;
+}
+/**Se o layout for menor que 650 ai ele bota 1 coluna linha do grid, tudo pra manter a responsividade **/ 
+@media (max-width: 650px) {
+    main ul {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,31 @@
+/** Estilizações exclusivas para o coponente App **/ 
+
+#app {
+    max-width: 1200px;
+    margin: 0 auto; /** Se a tela do usuario for muito grande fica tudo centralizado **/ 
+    padding: 60px 30px; /** 60 em cima e embaixo e 30 na direita e esquerda **/ 
+
+    display: flex;
+    flex-direction: row; /** Quero que tudo que esteja dentro do app fique um do lado do outro, numa linha, por isso row **/
+    align-items: flex-start; /** Para que o Aside e o Main sempre fiquem alinhados ao topo **/ 
+}
+
+#app main{
+    margin-left: 30px;
+}
+
+/**Ajuda na responsividade quando estiver abaixo de 1000 ele reposiciona o elemento pra baixo do outro**/ 
+@media (max-width: 1000px) {
+    #app{
+        flex-direction: column;
+    }
+
+    #app main{
+        margin-left: 0;
+        margin-top: 30px;
+    }
+
+    #app aside{
+        width: 100%;
+    }
+}

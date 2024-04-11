@@ -1,0 +1,26 @@
+/** Onde vai ficar as estilizações globais que serão 
+utilizadas por toda a aplicação **/ 
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+* { /** Resetando alguns comportamentos padrões que alguns elementos do HTML tem  **/ 
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box; 
+}
+/** O elemento HTML é o que cobre toda a aplicação**/ 
+html, body, #root {
+    height: 100%;
+}
+
+body {
+    background: #e5e6f0;
+    -webkit-font-smoothing: antialiased; /** Deixa a fonte mais legivel, so no crome **/ 
+
+}
+
+body, input, button {
+    font-family: Roboto, sans-serif; /** Usar ROBOTO e se não tiver usar uma sans-serif **/ 
+}
