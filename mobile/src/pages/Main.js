@@ -5,6 +5,7 @@ import { requestForegroundPermissionsAsync, getCurrentPositionAsync } from 'expo
 import { MaterialIcons } from "@expo/vector-icons";
 
 import api from '../services/api'; // Começar a puxar as informações do Back, parte funcional
+import {connect, disconnect, subscribeToNewDevs} from '../services/socket';
 
 function Main({ navigation }) {
     const [devs, setDevs] = useState([]);
@@ -34,6 +35,22 @@ function Main({ navigation }) {
         loadInitalPosition();
     }, []);
 
+    useEffect(() => {
+        subscribeToNewDevs(dev => setDevs([...devs, dev])) // copia todas as informações que ja tem e adiciona o novo dev
+    }, [devs]) // Toda vez que devs mudar chamar a função subscribeToNewDevs
+
+    function setupWebSocket() {
+        disconnect(); // Para que ele não fique com conexões sobrando 
+
+        const { latitude, longitude } = currentRegion;
+        // Podemos enviar parametros na conexão como latitude, etc
+        connect(
+            latitude,
+            longitude,
+            techs,
+        );
+    }
+
     async function loadDevs(){
         const { latitude, longitude } = currentRegion;
 
@@ -46,6 +63,9 @@ function Main({ navigation }) {
         })
 
         setDevs(response.data.devs);
+        
+        // No load Devs é onde o socket vai ficar escutando para atualizar quando houver novos cadastros
+        setupWebSocket();
     }
 
     function handleRegionChanged(region){ // Quando o usuario mexe no mapa é preciso atualziar a posição recebida em loadInitalPosition 
